@@ -27,10 +27,26 @@ const fs = require('fs');
 // const write = fs.writeFile('quote.txt');
 // read.pipe(write);
 
-/// Övning 1 
+/// Övning 1.1 - 1.2 
 
-let quote2 = 'Why, sometimes I´ve believed as many as six impossible things before lunch ';
-const file2 = fs.createWriteStream('alicequotes.txt');
-fs.writeFile('alicequote.txt', quote2, (err) =>{
-    console.log(quote2);
-})
+// let quote2 = 'Why, sometimes I´ve believed as many as six impossible things before lunch ';
+// const file2 = fs.createWriteStream('alicequotes.txt');
+// fs.writeFile('alicequote.txt', quote2, (err) =>{
+//     console.log(quote2);
+// })
+
+// övinig 1.3
+const stdin = process.openStdin();
+const file =  fs.createWriteStream('OscarWilde.txt');
+const stadinCallback = (input)=> {
+    const text = input.toString();
+    
+    
+    if (text == 'done'){
+        file.end();
+    } else {
+        file.write(text);       
+    }
+
+}
+stdin.addListener('data', stadinCallback);
